@@ -46,3 +46,17 @@
 .team-div h4, .team-div-2 div h4{
     color: var(--color-third);
 }
+
+/* ------------ Media Query ------------- */
+@media (max-width: 700px){
+    .team-div-2{
+        gap: 4em;
+    }
+
+    .team-div img, .team-div-2 img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+ }

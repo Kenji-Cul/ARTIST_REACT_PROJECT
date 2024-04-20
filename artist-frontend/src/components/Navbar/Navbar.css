@@ -38,8 +38,12 @@
     cursor: pointer;
 }
 
-.navbar ul li:hover{
-    background: var(--color-secondary);
+.navbar ul li a{
+    text-decoration: none;
+    color: var(--color-secondary);
+}
+
+.navbar ul a:hover{
     color: var(--color-third);
     transition: 0.5s;
 }
@@ -47,12 +51,12 @@
 .navbar ul .home-link{
     background: var(--color-secondary);
     color: var(--color-third);
+    padding: 8px 2.5em;
 }
 
 .navbar ul .home-link:hover{
     background: var(--color-primary);
     color: var(--color-secondary);
-
 }
 
 /* ------------ Media Query ------------- */
@@ -105,23 +109,32 @@
     .navbar ul li{
         padding-bottom: 1.5em;
         font-size: 20px;
-        color: #fff;
+        color: #fff!important;
         transition: none;
         background: none;
+    }
+
+    .navbar ul li a{
+        color: #fff;
+    }
+
+    .navbar ul li a:hover{
+        color:#fff;
     }
 
     .navbar ul .home-link{
         background: var(--color-third);
         color: var(--color-secondary);
+        padding: 0!important;
     }
 
+
     .navbar ul li:hover{
-        background: var(--color-third);
-        color: #fff;
+        color: #fff!important;
     }
 
     .navbar ul .home-link:hover{
         background: var(--color-third);
-        color: var(--color-secondary);
+        color: var(--color-primary);
     }
 }

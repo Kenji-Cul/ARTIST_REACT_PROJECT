@@ -25,11 +25,11 @@ const Navbar = () => {
        <Link to='/'><img src={Logo} alt="" /></Link>
        <ul ref={menu}>
         <li className="close-icon"><img src={CloseIcon} alt="" onClick={resetMenu}/></li>
-        <li class={(pathname==='/') ? 'home-link': ''}><Link to='/' class={(pathname==='/') ? 'navbar-link': ''}>Home</Link></li>
-        <li class={(pathname==='/about') ? 'home-link': ''}><Link to='about' class={(pathname==='/about') ? 'navbar-link': ''}>About Us</Link></li>
-        <li>Artists</li>
-        <li>Events</li>
-        <li>Contact Us</li>
+        <li ><Link to='/' className={(pathname==='/') ? 'home-link': ''}>Home</Link></li>
+        <li ><Link to='about' className={(pathname==='/about') ? 'home-link': ''} >About Us</Link></li>
+        <li><Link>Artists</Link></li>
+        <li><Link>Events</Link></li>
+        <li><Link>Contact Us</Link></li>
        </ul>
        <img src={MenuIcon} alt="" className="menu-icon" onClick={toggleMenu}/>
     </div>

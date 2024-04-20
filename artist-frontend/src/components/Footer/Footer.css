@@ -47,6 +47,11 @@
  font-size: 20px;
 }
 
+.sitemap-container ul li a{
+    color: var(--color-secondary);
+    text-decoration: none;
+}
+
 .sitemap-container ul li:first-child p{
     text-decoration: underline;
 }
@@ -78,5 +83,11 @@
     .copyrights-container .copyrights{
         width: 10%;
         height: 10%;
+    }
+}
+
+@media (max-width: 500px){
+    .first-container p{
+        width: 80%;
     }
 }
