@@ -1,0 +1,52 @@
+.history-div .image-div img{
+    width: 284px;
+    height: 294px;
+    border-radius: 50px;
+}
+
+.history-parent-container{
+    padding-top: 8em;
+    padding-left: 1%;
+    padding-right: 1%;
+    background: var(--color-secondary);
+}
+
+.history-parent-container h3{
+    color: var(--color-third);
+    padding-left: 5%;
+}
+
+.history-div-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2em;
+    padding-bottom: 4em;
+}
+
+.history-div{
+ width: 30%;
+ padding-bottom: 4em;
+}
+
+.history-div p{
+    width: 50%;
+    color: var(--color-third);
+}
+
+.round-image{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-top: 1em;
+}
+
+.round-image img{
+    width: 60px;
+    height: 60px;
+   border-radius: 50%;
+}

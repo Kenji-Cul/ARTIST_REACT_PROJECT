@@ -4,6 +4,7 @@ import CallImage from '../../images/call.png'
 import Copyright from '../../images/copyright.png'
 import Logo from '../../images/Logo.png'
 import './Footer.css'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -26,15 +27,15 @@ const Footer = () => {
                 <li>
                     <p>Sitemap</p>
                 </li>
-                <li>Home</li>
-                <li>About Us</li>
+                <li><Link to='/' className="footer-link">Home</Link></li>
+                <li><Link to='about' className="footer-link">About Us</Link></li>
                 <li>Artists</li>
                 <li>Events</li>
                 <li>Contact Us</li>
             </ul>
         </div>
         <div className="copyrights-container">
-          <img src={Logo} alt="" />
+          <Link to='/'><img src={Logo} alt="" /></Link>
           <p>Copyrights <img src={Copyright} alt="" className="copyrights"/></p>
         </div>
     </div>

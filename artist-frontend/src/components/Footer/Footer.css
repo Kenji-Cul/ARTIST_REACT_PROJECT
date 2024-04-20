@@ -9,6 +9,12 @@
     justify-content: space-between;
 }
 
+.footer-link{
+    text-decoration: none;
+    color: var(--color-secondary);
+}
+
+
 .first-container{
     display: flex;
     align-items: left;

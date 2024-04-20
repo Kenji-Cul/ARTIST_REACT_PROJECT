@@ -10,6 +10,16 @@
     z-index: 10000!important;
 }
 
+.navbar-link{
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.navbar-link:hover{
+    color: var(--color-secondary);
+}
+
+
 .menu-icon,.close-icon{
    display: none;
    cursor: pointer;

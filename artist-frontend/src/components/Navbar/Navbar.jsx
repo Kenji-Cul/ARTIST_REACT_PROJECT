@@ -1,10 +1,14 @@
 import React, { useRef} from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import './Navbar.css'
 import Logo from '../../images/Logo.png'
 import MenuIcon from '../../images/menu.png'
 import CloseIcon from '../../images/close.png'
 
 const Navbar = () => {
+
+    const location = useLocation();
+    const pathname = location.pathname;
   
    const menu = useRef();
 
@@ -18,11 +22,11 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-       <img src={Logo} alt="" />
+       <Link to='/'><img src={Logo} alt="" /></Link>
        <ul ref={menu}>
         <li className="close-icon"><img src={CloseIcon} alt="" onClick={resetMenu}/></li>
-        <li class="home-link">Home</li>
-        <li>About Us</li>
+        <li class={(pathname==='/') ? 'home-link': ''}><Link to='/' class={(pathname==='/') ? 'navbar-link': ''}>Home</Link></li>
+        <li class={(pathname==='/about') ? 'home-link': ''}><Link to='about' class={(pathname==='/about') ? 'navbar-link': ''}>About Us</Link></li>
         <li>Artists</li>
         <li>Events</li>
         <li>Contact Us</li>
