@@ -27,9 +27,9 @@ const Navbar = () => {
         <li className="close-icon"><img src={CloseIcon} alt="" onClick={resetMenu}/></li>
         <li ><Link to='/' className={(pathname==='/') ? 'home-link': ''}>Home</Link></li>
         <li ><Link to='about' className={(pathname==='/about') ? 'home-link': ''} >About Us</Link></li>
-        <li><Link>Artists</Link></li>
-        <li><Link>Events</Link></li>
-        <li><Link>Contact Us</Link></li>
+        <li><Link to='artists' className={(pathname==='/artists') ? 'home-link': ''}>Artists</Link></li>
+        <li><Link to="events" className={(pathname==='/events') ? 'home-link': ''}>Events</Link></li>
+        <li><Link to="contactus" className={(pathname==='/contactus') ? 'home-link': ''}>Contact Us</Link></li>
        </ul>
        <img src={MenuIcon} alt="" className="menu-icon" onClick={toggleMenu}/>
     </div>

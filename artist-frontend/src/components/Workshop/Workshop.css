@@ -1,0 +1,61 @@
+.workshop-container{
+ padding-top: 8em;
+ background: var(--color-secondary);
+}
+
+.workshop-container h3{
+    padding-left: 5%;
+    color: var(--color-primary);
+}
+
+.workshop-list{
+    padding-left: 5%;
+    padding-right: 20%;
+    padding-top: 3em;
+    padding-bottom: 6em;
+}
+
+.workshop-div{
+    width: 28em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+}
+
+.workshop-div p{
+    color: var(--color-third);
+}
+
+.workshop-div .workshop-desc{
+    width: 60%;
+    color: #fff!important;
+}
+
+.workshop-flex-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4em;
+}
+
+.workshop-div img{
+    height: 12em;
+    width: 20em;
+    object-fit: cover;
+}
+
+/* ------------ Media Query ------------- */
+@media (max-width: 1400px){ 
+    .workshop-list{
+      padding-left: 50px!important;
+    }
+
+    .workshop-list .workshop-desc{
+        width: 90%;
+    }
+
+    .workshop-flex-container{
+        gap: 5em;
+        flex-wrap: wrap;
+    }
+}

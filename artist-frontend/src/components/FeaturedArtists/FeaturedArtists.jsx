@@ -4,8 +4,6 @@ import Featured1 from '../../images/featured-1.jpg'
 import Featured2 from '../../images/featured-2.jpg'
 import Featured3 from '../../images/featured-3.jpg'
 import Featured4 from '../../images/featured-4.jpg'
-import Featured5 from '../../images/featured-5.jpg'
-import Featured6 from '../../images/featured-6.jpg'
 
 
 const FeaturedArtists = () => {

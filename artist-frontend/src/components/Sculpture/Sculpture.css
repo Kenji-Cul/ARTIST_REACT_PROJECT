@@ -1,0 +1,58 @@
+.sculpture-div img{
+    height: 12em;
+    width: 20em;
+    object-fit: cover;
+}
+
+.sculpture-div p{
+    color: var(--color-third);
+}
+
+.sculpture-div{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.sculpture-container{
+    padding-bottom: 5em;
+    background: var(--color-secondary);
+}
+
+.sculpture-container h3{
+    padding-top: 2em;
+    padding-left: 5%;
+    color: var(--color-third);
+}
+
+.sculpture-div-container .sculpture-flex-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   padding-top: 3em;
+   padding-bottom: 3em;
+   padding-left: 5%;
+   padding-right: 40%;
+}
+
+/* ------------ Media Query ------------- */
+@media (max-width: 1400px){ 
+    .sculpture-div-container .sculpture-flex-container{
+        padding-right: 20%;
+    }
+}
+
+@media (max-width: 1000px){ 
+    .sculpture-div-container .sculpture-flex-container{
+        padding-right: 10%;
+    }
+}
+
+@media (max-width: 800px){ 
+    .sculpture-div-container .sculpture-flex-container{
+        padding-right: 10%;
+        flex-direction: column;
+        padding-bottom: 0;
+        gap: 5em;
+    }
+}

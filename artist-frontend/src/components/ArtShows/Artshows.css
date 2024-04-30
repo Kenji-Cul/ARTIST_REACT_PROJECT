@@ -1,0 +1,116 @@
+.artshows-div .artshows-img{
+    height: 17em;
+    width: 35em;
+    object-fit: cover;
+}
+
+.artshows-parent-container{
+    padding-left: 5%;
+    padding-top: 3em;
+    padding-bottom: 4em;
+    background: var(--color-secondary);
+}
+
+.artshows-parent-container h3{
+    padding-bottom: 2em;
+    color: var(--color-primary);
+}
+
+
+.artshows-star{
+    width: 14em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 8px 8px;
+    background: var(--color-third);
+}
+
+.artshows-div p{
+    width: 30%;
+    color: var(--color-third);
+}
+
+.artshow-desc{
+    color: #fff!important;
+}
+
+.artshows-btn{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 6em;
+    width: 30%;
+}
+
+.artshows-btn button{
+  padding: 10px;
+  width: 11em;
+  font-size: 15px;
+  background: #000;
+  color: var(--color-third);
+  border-radius: 5px;
+  border: 3px solid var(--color-third);
+  cursor: pointer;
+}
+
+.artshows-div{
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    position: relative;
+}
+
+.artshows-container{
+    display: flex; 
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    gap: 9em;
+    position: relative;
+}
+
+/* ------------ Media Query ------------- */
+@media (max-width: 1400px){ 
+    .artshows-div .artshows-img{
+       width: 28em;
+       height: 13em;
+       object-fit: cover;
+    }
+
+   .artshows-div p{
+    width: 60%;
+   }
+
+   .artshows-btn{
+    width: 60%;
+   }
+}
+
+@media (max-width: 600px){ 
+    .artshows-div .artshows-img{
+        width: 80%;
+        height: 13em;
+        object-fit: cover;
+     }
+
+     .artshows-div p{
+        width: 80%;
+       }
+
+
+    .artshows-btn{
+        width: 50%;
+        gap: 3em;
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+

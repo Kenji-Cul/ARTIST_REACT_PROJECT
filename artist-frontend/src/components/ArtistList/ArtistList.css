@@ -1,0 +1,51 @@
+.artist-list-container{
+    padding-top: 8em;
+    background: var(--color-third);
+    padding-bottom: 8em;
+}
+
+.artist-list-container h3{
+    padding-left: 5%;
+    margin-bottom: 2em;
+}
+
+.artist-list-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 5%;
+    padding-right: 50%;
+}
+
+.artist-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    padding-bottom: 2em;
+}
+
+.artist-details img{
+    width: 75px;
+    height: 75px;
+   border-radius: 50%;
+}
+
+/* ------------ Media Query ------------- */
+@media (max-width: 1400px){  
+     .artist-list-div{
+        padding-right: 20%;
+     }
+}  
+
+@media (max-width: 600px){ 
+    .artist-list-div{
+      display: flex;
+      flex-direction: column;
+    padding-left: 20px;
+    padding-bottom: 0;
+    gap: 2em;
+    }
+}

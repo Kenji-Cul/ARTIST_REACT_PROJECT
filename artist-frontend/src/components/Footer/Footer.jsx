@@ -29,9 +29,9 @@ const Footer = () => {
                 </li>
                 <li><Link to='/' className="footer-link">Home</Link></li>
                 <li><Link to='about' className="footer-link">About Us</Link></li>
-                <li><Link>Artists</Link></li>
-                <li><Link>Events</Link></li>
-                <li><Link>Contact Us</Link></li>
+                <li><Link to='artists' className="footer-link">Artists</Link></li>
+                <li><Link to='events' className="footer-link">Events</Link></li>
+                <li><Link to='contactus' className="footer-link">Contact Us</Link></li>
             </ul>
         </div>
         <div className="copyrights-container">

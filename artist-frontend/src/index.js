@@ -6,6 +6,9 @@ import Layout from './components/Layout';
 import ErrorPage from './pages/ErrorPage';
 import Home from './pages/Home';
 import AboutPage from './pages/AboutPage';
+import ArtistPage from './pages/ArtistPage';
+import EventsPage from './pages/EventsPage';
+import ContactPage from './pages/ContactPage';
 
 
 const router = createBrowserRouter([
@@ -16,6 +19,9 @@ const router = createBrowserRouter([
         children: [
             {index: true, element: <Home />},
             {path: "about", element: <AboutPage />},
+            {path: "artists", element: <ArtistPage />},
+            {path: "events", element: <EventsPage />},
+            {path: "contactus", element: <ContactPage />},
         ]
      }
 ])
