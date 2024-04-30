@@ -9,6 +9,8 @@ import AboutPage from './pages/AboutPage';
 import ArtistPage from './pages/ArtistPage';
 import EventsPage from './pages/EventsPage';
 import ContactPage from './pages/ContactPage';
+import RegisterPage from './pages/RegisterPage';
+import ArtistProfile from './pages/ArtistProfile';
 
 
 const router = createBrowserRouter([
@@ -22,6 +24,8 @@ const router = createBrowserRouter([
             {path: "artists", element: <ArtistPage />},
             {path: "events", element: <EventsPage />},
             {path: "contactus", element: <ContactPage />},
+            {path: "register", element: <RegisterPage />},
+            {path: "artistprofile", element: <ArtistProfile />},
         ]
      }
 ])

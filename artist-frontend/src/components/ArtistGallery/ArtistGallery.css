@@ -1,0 +1,42 @@
+.artist-gallery-container{
+    padding-top: 4em;
+    padding-bottom: 5em;
+    background: var(--color-third);
+}
+
+.artist-gallery-container h3{
+    padding-left: 4em;
+}
+
+.artist-gallery{
+    padding-top: 7em;
+    padding-left: 30%;
+    padding-right: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9em;
+}
+
+.gallery-art{
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.gallery-art img{
+    width: 18em;
+    height: 18em;
+    border-radius: 50px;
+}
+
+
+@media (max-width: 800px){ 
+    .gallery-art img{
+        width: 15em;
+        height: 15em;
+    }
+}
