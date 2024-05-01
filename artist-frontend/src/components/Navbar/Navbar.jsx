@@ -29,6 +29,7 @@ const Navbar = () => {
         <li ><Link to='about' className={(pathname==='/about') ? 'home-link': ''} >About Us</Link></li>
         <li><Link to='artists' className={(pathname==='/artists') ? 'home-link': ''}>Artists</Link></li>
         <li><Link to="events" className={(pathname==='/events') ? 'home-link': ''}>Events</Link></li>
+        <li><Link to="register" className={(pathname==='/register') ? 'home-link': ''}>Register</Link></li>
         <li><Link to="contactus" className={(pathname==='/contactus') ? 'home-link': ''}>Contact Us</Link></li>
        </ul>
        <img src={MenuIcon} alt="" className="menu-icon" onClick={toggleMenu}/>
