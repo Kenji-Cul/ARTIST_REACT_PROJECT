@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { SliderData } from './SliderData';
+// import { SliderData } from './SliderData';
 import ForwardArrow from '../images/arrow_forward.png'
 import BackwardArrow from '../images/arrow_backward.png'
+import { useSelector } from 'react-redux';
 
 const SliderDiv = () => {
     const [current, setCurrent] = useState(0);
+    const SliderData = useSelector((state) => state.data.sliderdata);
     const length = SliderData.length;
 
     const nextSlide = () => {
@@ -45,7 +47,7 @@ const SliderDiv = () => {
                                     </div>
                                 </div>
                                 <img src={slide.artist_image} alt="" className='artist-img'/>
-                                <p class="slide-info">
+                                <p className="slide-info">
                                {slide.slideinfo1}
                                 </p>
                             </div>
