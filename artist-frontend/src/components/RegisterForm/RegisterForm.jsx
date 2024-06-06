@@ -5,8 +5,13 @@ import { v4 as uuid } from "uuid";
 import { Link, useNavigate } from 'react-router-dom';
 import { faEyeSlash, faEye, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { signupUser, signupSelector, clearState } from '../../features/signupSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const RegisterForm = () => {
+   let link = "http://localhost:3000/signup";
+   
+   const dispatch = useDispatch();
 
  const [name, setName] = useState("");
  const [location, setLocation] = useState("");
@@ -15,7 +20,12 @@ const RegisterForm = () => {
  const [password, setPassword] = useState("");
 
  const [errorMessage, setErrorMessage] = useState("");
+ 
  const [success, setSuccess] = useState(false);
+
+ const { isFetching, isSuccess, isError, errorMsg } = useSelector(
+   signupSelector
+);
 
 
 
@@ -55,9 +65,16 @@ let newPass = e.target.value;
 }
 
 useEffect(() => {
-    if(errorMessage == "Password is strong!"){
-        errDiv.current.style.backgroundColor = "green";
-    }
+   errorMessage == ""  ?  errDiv.current.style.display = "none" :  
+   errDiv.current.style.display = "block"
+   if(errorMessage == "Password is strong!"){
+      errDiv.current.style.backgroundColor = "green";
+  } else {
+    errDiv.current.style.backgroundColor = "#E53124";
+  }
+   ;
+
+    
 }, [errorMessage])
 
 
@@ -86,13 +103,46 @@ if (type==='password'){
     setEmail("");
     setPhone("");
     setPassword("");
-    errDiv.current.style.display = "none";
-    setSuccess(true);
 
+    let data = {name, location, email, phone, password};
+
+    dispatch(signupUser(data));
+
+    const response = await fetch(link, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  });
+  const error = await response.text();
+  setErrorMessage(error);
  
-    console.log({name, location, email, phone, password});
+    //console.log({name, location, email, phone, password});
   
   }
+
+//   useEffect(() => {
+//    return () => {
+//        dispatch(clearState());
+//    };
+// }, [isSuccess]);
+
+useEffect(() => {
+   if (isError) {
+       console.log(errorMsg);
+       dispatch(clearState()); 
+   }
+
+   if (isSuccess) {
+       dispatch(clearState());
+       setSuccess(true);
+      
+      //  localStorage.getItem("token") ?  setSuccess(true) : null;
+        }
+}, [isError, isSuccess]);
+
+
   return (
     <div className="register-form-container">
       {
@@ -102,6 +152,7 @@ if (type==='password'){
                   <FontAwesomeIcon icon={faCircleCheck} />
                   <Link to='/login' className="success-link">Login</Link>
                 </div>
+                <p className={(errorMessage != "" ? "error-msg" : "error-msg off-screen")} ref={errDiv}></p>
         </div> ) : (
              
              <div className="form-container">
@@ -121,7 +172,7 @@ if (type==='password'){
                 
              </div>
           
-             <button type="submit">Register</button>
+          {isFetching ?  <button>Loading...</button> :  <button type="submit">Register</button>}
              <p>Already Registered? <Link to='/login' className="login-link">Login</Link></p>
           </form>
         

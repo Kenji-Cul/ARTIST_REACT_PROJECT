@@ -9,6 +9,9 @@ const express = require('express');
 const cors = require("cors");
 const connectToDb = require('./config/connectToDb');
 const Artist = require('./models/artist');
+const artistController = require('./controllers/artistController');
+
+const secretKey = 'your-secret-key';
 
 // Create an express app
 const app = express();
@@ -26,34 +29,9 @@ app.use(express.json());
 connectToDb();
 
 //Routing
-app.post('/artists', async (req, res) => {
-     // Get the sent in data off request body
-     const name = req.body.name;
-     const location = req.body.location;
-     const phone = req.body.phone;
-     const email = req.body.email;
-     const password = req.body.password;
+app.post('/signup', artistController.signup)
 
-    //  Create an artist with it
-    const artist = await Artist.create({
-        name: name,
-        location: location,
-        phone: phone,
-        email: email,
-        password: password,
-        // img: {
-        //     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-        //     contentType: 'image/png'
-        // }
-    });
-
-    // respond with the new artist
-    res.json({ artist: artist });
-
-    
-})
-
-app.get('/artists', async (req, res) => {
+app.get('/login', async (req, res) => {
     //Find the artists
     const artists = await Artist.find();
 
