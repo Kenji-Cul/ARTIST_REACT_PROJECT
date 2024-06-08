@@ -3,10 +3,17 @@ import './LoginForm.css'
 import axios from "axios"
 import { v4 as uuid } from "uuid";
 import { Link, useNavigate } from 'react-router-dom';
-import { faEyeSlash, faEye} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEyeSlash, faEye, faCircleCheck} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { loginSelector, loginUser, clearState } from '../../features/loginSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const LoginForm = () => {
+
+   let link = "http://localhost:3000/login";
+   
+   const dispatch = useDispatch();
 
  
  const [email, setEmail] = useState("");
@@ -15,10 +22,17 @@ const LoginForm = () => {
 
  const [errorMessage, setErrorMessage] = useState("");
 
+ const [success, setSuccess] = useState(false);
+
+
  const emailInput = useRef(null);
  
  const passwordInput = useRef(null);
  const errDiv = useRef();
+
+ const { isFetching, isSuccess, isError, errorMsg } = useSelector(
+   loginSelector
+);
  
 
 
@@ -26,30 +40,9 @@ const passwordChange = (e) => {
 let newPass = e.target.value;
    setPassword(newPass);
  
-
-   // regular expressions to validate password
-   var lowerCase = /[a-z]/g;
-   var upperCase = /[A-Z]/g;
-   var numbers = /[0-9]/g;
-   if (!newPass.match(lowerCase)) {
-      setErrorMessage("Password should contains lowercase letters!");
-   } else if (!newPass.match(upperCase)) {
-      setErrorMessage("Password should contain uppercase letters!");
-   } else if (!newPass.match(numbers)) {
-      setErrorMessage("Password should contains numbers also!");
-   } else if (newPass.length < 10) {
-      setErrorMessage("Password length should be more than 10.");
-   } else {
-      setErrorMessage("Password is strong!"); 
-   }
    
 }
 
-useEffect(() => {
-    if(errorMessage == "Password is strong!"){
-        errDiv.current.style.backgroundColor = "green";
-    }
-}, [errorMessage])
 
 
 const [type, setType] = useState('password');
@@ -73,32 +66,66 @@ if (type==='password'){
    
     setEmail("");
     setPassword("");
-    errDiv.current.style.display = "none";
+   
 
-    console.log({ email, password});
+    let data = {email, password};
+    dispatch(loginUser(data));
+ 
+   
+
+    //console.log({ email, password});
   
   }
+
+  useEffect(() => {
+   if (isError) {
+      console.log(errorMsg);
+       dispatch(clearState());
+   }
+
+   if (isSuccess) {
+       dispatch(clearState());
+       setSuccess(true);
+      
+      //  localStorage.getItem("token") ?  setSuccess(true) : null;
+        }
+}, [isError, isSuccess]);
+
+
   return (
     <div className="register-form-container">
-    <div className="form-container">
-     <h3>Login as an Artist</h3>
-
-  <form  className="register-form" onSubmit={handleSubmit}>
-
-     <input type="email" placeholder="Email" name="email" ref={emailInput}  value={email} onChange={(e) => setEmail(e.target.value)} required/>
-    
-     <div className="input-div">
-        <input type={type} placeholder="Password" name="password" ref={passwordInput}  value={password} onChange={(e) => passwordChange(e)} required/>
-        <p className={(errorMessage != "" ? "error-msg" : "error-msg off-screen")} ref={errDiv}>{errorMessage}</p>
-        <span className="eye-slash" onClick={handleClick}> <FontAwesomeIcon icon={icon} /></span>
-        
-     </div>
-  
-     <button type="submit">Login</button>
-     <p>Not Registered? <Link to='/register' className="login-link">Register</Link></p>
-  </form>
-
-  </div>
+      {
+         success ? (
+            <div className="form-container">
+                <div className="success-div">
+                   <h3>Login Success!</h3>
+                  <FontAwesomeIcon icon={faCircleCheck} />
+                </div>
+                <p  ref={errDiv}></p>
+        </div>
+         ) : (
+            <div className="form-container">
+            <h3>Login as an Artist</h3>
+       
+         <form  className="register-form" onSubmit={handleSubmit}>
+       
+            <input type="email" placeholder="Email" name="email" ref={emailInput}  value={email} onChange={(e) => setEmail(e.target.value)} required/>
+           
+            <div className="input-div">
+               <input type={type} placeholder="Password" name="password" ref={passwordInput}  value={password} onChange={(e) => passwordChange(e)} required/>
+              { errorMsg !="" ? <p className="error-msg" ref={errDiv}>{errorMsg}</p> : null}
+               <span className="eye-slash" onClick={handleClick}> <FontAwesomeIcon icon={icon} /></span>
+               
+            </div>
+         
+           {isFetching ? <button>Loading...</button> : <button type="submit">Login</button>} 
+            <p>Not Registered? <Link to='/register' className="login-link">Register</Link></p>
+         </form>
+       
+         </div>
+         )
+      }
+   
 </div>
   )
 }

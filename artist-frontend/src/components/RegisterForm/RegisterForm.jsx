@@ -152,7 +152,7 @@ useEffect(() => {
                   <FontAwesomeIcon icon={faCircleCheck} />
                   <Link to='/login' className="success-link">Login</Link>
                 </div>
-                <p className={(errorMessage != "" ? "error-msg" : "error-msg off-screen")} ref={errDiv}></p>
+                <p  ref={errDiv}></p>
         </div> ) : (
              
              <div className="form-container">

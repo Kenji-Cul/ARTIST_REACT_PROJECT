@@ -31,13 +31,7 @@ connectToDb();
 //Routing
 app.post('/signup', artistController.signup)
 
-app.get('/login', async (req, res) => {
-    //Find the artists
-    const artists = await Artist.find();
-
-    // Respond with them
-    res.json({ artists: artists });
-});
+app.post('/login', artistController.login);
 
 app.get('/artists/:id', async (req, res) => {
     // Get id off the url

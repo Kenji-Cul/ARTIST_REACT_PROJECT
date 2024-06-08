@@ -42,6 +42,24 @@ async function signup(req, res) {
     }
 }
 
+async function login(req, res) {
+    const user = await Artist.findOne({ email : req.body.email });
+       try{
+           const match = await bcrypt.compare(req.body.password, user.password);
+           const accessToken = jwt.sign(JSON.stringify(user), process.env.SECRET);
+           if(match){
+                 res.send(accessToken);
+           } else {
+                res.status(400).send("Invalid Credentials");
+           }
+       }
+
+       catch(e){
+            console.log(e);
+       }
+}
+
 module.exports = {
     signup,
+    login,
 }

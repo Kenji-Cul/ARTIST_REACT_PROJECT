@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import ArtistProfile from "./pages/ArtistProfile";
 import ErrorPage from "./pages/ErrorPage";
 import ArtistPage from "./pages/ArtistPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 
 function App() {
@@ -23,7 +24,9 @@ function App() {
              <Route  path="contactus" element={<ContactPage />}/>
              <Route  path="register" element={<RegisterPage />}/>
              <Route  path="login" element={<LoginPage />}/>
+             <Route element={<PrivateRoute />}>
              <Route  path="artistprofile" element={<ArtistProfile />}/>
+             </Route>
              <Route  path="*" element={<ErrorPage />}/>
 
           </Route>

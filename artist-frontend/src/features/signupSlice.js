@@ -56,7 +56,7 @@ export const signupSlice = createSlice({
         builder
         .addCase(signupUser.fulfilled, (state, { payload }) => {
             console.log(payload);
-            state.token = payload.token;
+            
             state.isFetching = false;
             state.isSuccess = true;
             return state;

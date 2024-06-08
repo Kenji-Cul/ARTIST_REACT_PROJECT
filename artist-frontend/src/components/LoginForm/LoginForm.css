@@ -83,3 +83,22 @@
     text-decoration: underline;
     color: var(--color-third);
 }
+
+.success-link{
+    text-decoration: underline;
+    color: var(--color-secondary);
+}
+
+.success-div{
+    width: 20em;
+    height: 20em;
+    border-radius: 10px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5em;
+    background-color: var(--color-third);
+    transition: all 1s;
+}
