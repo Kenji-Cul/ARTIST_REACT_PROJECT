@@ -30,10 +30,11 @@ const LoginForm = () => {
  const passwordInput = useRef(null);
  const errDiv = useRef();
 
- const { isFetching, isSuccess, isError, errorMsg } = useSelector(
+ const { isFetching, isSuccess, isError, errorMsg, userInfo } = useSelector(
    loginSelector
 );
  
+const navigate = useNavigate();
 
 
 const passwordChange = (e) => {
@@ -78,15 +79,19 @@ if (type==='password'){
   }
 
   useEffect(() => {
+    if (userInfo) {
+      navigate('/artistprofile');
+    }
+  }, [navigate, userInfo])
+
+  useEffect(() => {
    if (isError) {
       console.log(errorMsg);
-       dispatch(clearState());
    }
 
    if (isSuccess) {
-       dispatch(clearState());
        setSuccess(true);
-      
+        
       //  localStorage.getItem("token") ?  setSuccess(true) : null;
         }
 }, [isError, isSuccess]);

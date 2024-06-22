@@ -28,7 +28,7 @@ export const signupUser = createAsyncThunk("artists/register", async({name, loca
          }
       }
 
-       catch {
+       catch(e) {
           console.log("Error", e.response.data);
           return e.response.data;
        }

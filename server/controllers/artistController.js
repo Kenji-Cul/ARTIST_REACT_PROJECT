@@ -48,7 +48,15 @@ async function login(req, res) {
            const match = await bcrypt.compare(req.body.password, user.password);
            const accessToken = jwt.sign(JSON.stringify(user), process.env.SECRET);
            if(match){
-                 res.send(accessToken);
+                 res.send({
+                    accessToken, 
+                    user:{
+                        id: user._id,
+                        name: user.name,
+                        location: user.location,
+                        phone: user.phone,
+                        email: user.email
+                 }});
            } else {
                 res.status(400).send("Invalid Credentials");
            }

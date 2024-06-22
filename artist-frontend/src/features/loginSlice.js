@@ -15,7 +15,8 @@ export const loginUser = createAsyncThunk("artists/login", async({email, passwor
 
     //    console.log(re);
     if(response.status == 200){
-        localStorage.setItem('userToken', response.data);
+        localStorage.setItem('userToken', response.data.accessToken);
+        localStorage.setItem('userdetails', JSON.stringify(response.data.user));
        return response.data;
     } else {
         return response.data;
@@ -33,6 +34,7 @@ export const loginSlice = createSlice({
     name: "login",
     initialState: {
         token: "",
+        userInfo: null,
         isFetching: false,
         isSuccess: false,
         isError: false,
@@ -52,7 +54,8 @@ export const loginSlice = createSlice({
         builder
         .addCase(loginUser.fulfilled, (state, { payload }) => {
             // console.log(payload);
-            state.token = payload;
+            state.token = payload.accessToken;
+            state.userInfo = payload.user;
             state.isFetching = false;
             state.isSuccess = true;
             return state;

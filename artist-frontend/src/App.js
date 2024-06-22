@@ -9,7 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import ArtistProfile from "./pages/ArtistProfile";
 import ErrorPage from "./pages/ErrorPage";
 import ArtistPage from "./pages/ArtistPage";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 
 function App() {

@@ -75,6 +75,11 @@
         padding: 12px 5%;
        }
 
+    .navbar ul span{
+        display: flex;
+        flex-direction: column;
+    }
+
 
     .menu-icon{
         display: block;
