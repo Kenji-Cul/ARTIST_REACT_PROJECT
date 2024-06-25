@@ -15,6 +15,8 @@ export const signupUser = createAsyncThunk("artists/register", async({name, loca
          const response = await axios.post(link, params, {
             headers: {"Content-Type": "application/json"}
          });
+
+         
          
          let data = await response.data;
          if(response.status === 200){
@@ -29,8 +31,7 @@ export const signupUser = createAsyncThunk("artists/register", async({name, loca
       }
 
        catch(e) {
-          console.log("Error", e.response.data);
-          return e.response.data;
+        return thunkAPI.rejectWithValue(e.response.data);
        }
 });
 

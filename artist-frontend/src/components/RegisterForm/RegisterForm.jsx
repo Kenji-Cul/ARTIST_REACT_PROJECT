@@ -104,6 +104,8 @@ if (type==='password'){
     setPhone("");
     setPassword("");
 
+   
+
     let data = {name, location, email, phone, password};
 
     dispatch(signupUser(data));
@@ -115,8 +117,18 @@ if (type==='password'){
       },
       body: JSON.stringify(data),
   });
-  const error = await response.text();
-  setErrorMessage(error);
+
+   try {
+      const error = await response.text();
+  
+      setErrorMessage(error);
+   } catch (e){
+      const error = "No connection";
+  
+      setErrorMessage(error);
+   }
+   
+ 
  
     //console.log({name, location, email, phone, password});
   

@@ -34,6 +34,16 @@
     color: #fff;
 }
 
+.profile-container button{
+    padding: 0.7em 3em;
+    border-radius: 5px;
+    background: var(--color-secondary);
+    color: #fff;
+    font-size: 14px;
+    border: 2px solid var(--color-third);
+    cursor: pointer;
+}
+
 @media (max-width: 800px){ 
     .profile-container p{
         width: 80%;

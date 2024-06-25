@@ -33,6 +33,9 @@ const LoginForm = () => {
  const { isFetching, isSuccess, isError, errorMsg, userInfo } = useSelector(
    loginSelector
 );
+
+
+
  
 const navigate = useNavigate();
 
@@ -118,7 +121,8 @@ if (type==='password'){
            
             <div className="input-div">
                <input type={type} placeholder="Password" name="password" ref={passwordInput}  value={password} onChange={(e) => passwordChange(e)} required/>
-              { errorMsg !="" ? <p className="error-msg" ref={errDiv}>{errorMsg}</p> : null}
+              { errorMsg !=""
+ ? <p className="error-msg" ref={errDiv}>{errorMsg}</p> : null}
                <span className="eye-slash" onClick={handleClick}> <FontAwesomeIcon icon={icon} /></span>
                
             </div>

@@ -33,10 +33,15 @@ const artistSchema = new mongoose.Schema({
           type: String,
           required: true,
      },
-     // img: {
-     //      data: Buffer,
-     //      contentType: String
-     // }
+     description: {
+          type: String,
+          min: 3,
+          max: 1000,
+     },
+     img: {
+          data: Buffer,
+          contentType: String
+     }
 });
 
 const Artist = mongoose.model("Artist", artistSchema);
