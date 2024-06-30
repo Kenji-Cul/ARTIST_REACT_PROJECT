@@ -118,15 +118,11 @@ if (type==='password'){
       body: JSON.stringify(data),
   });
 
-   try {
+   
       const error = await response.text();
   
       setErrorMessage(error);
-   } catch (e){
-      const error = "No connection";
-  
-      setErrorMessage(error);
-   }
+   
    
  
  
@@ -142,7 +138,7 @@ if (type==='password'){
 
 useEffect(() => {
    if (isError) {
-       console.log(errorMsg);
+       
        dispatch(clearState()); 
    }
 
