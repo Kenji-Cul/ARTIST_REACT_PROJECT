@@ -30,15 +30,24 @@ const Navbar = () => {
     
    }
 
-
-   let user = localStorage.getItem("userdetails");
-  //  const dispatch = useDispatch();
    const logOut = () => {
     localStorage.removeItem('userToken')
     localStorage.removeItem('userdetails')
     window.location.reload();
     resetMenu();
    }
+
+
+   let user = localStorage.getItem("userdetails");
+   let usertoken = localStorage.getItem("userToken");
+   if(usertoken){
+     const res = (new Date()).getTime() > JSON.parse(usertoken).expDate;
+     if(res){
+       logOut()
+     }
+   }
+  //  const dispatch = useDispatch();
+   
 
   return (
     <div className="navbar">

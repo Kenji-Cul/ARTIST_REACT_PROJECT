@@ -11,6 +11,8 @@ import ErrorPage from "./pages/ErrorPage";
 import ArtistPage from "./pages/ArtistPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UpdateDetails from "./components/UpdateDetails/UpdateDetails";
+import UserRoute from "./components/UserRoute/UserRoute";
+import Gallery from "./components/Gallery/Gallery";
 
 
 function App() {
@@ -23,12 +25,18 @@ function App() {
              <Route  path="artists" element={<ArtistPage />}/>
              <Route  path="events" element={<EventsPage />}/>
              <Route  path="contactus" element={<ContactPage />}/>
+             
+             
+
+             <Route element={<UserRoute />}>
              <Route  path="register" element={<RegisterPage />}/>
              <Route  path="login" element={<LoginPage />}/>
-           
+             </Route>
+
              <Route element={<PrivateRoute />}>
              <Route  path="artistprofile" element={<ArtistProfile />}/>
              <Route  path="updatedetails" element={<UpdateDetails />}/>
+             <Route  path="gallery" element={<Gallery />}/>
              </Route>
              <Route  path="*" element={<ErrorPage />}/>
 

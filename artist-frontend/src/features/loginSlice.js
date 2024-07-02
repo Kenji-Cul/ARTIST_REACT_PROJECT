@@ -8,14 +8,31 @@ export const loginUser = createAsyncThunk("artists/login", async({email, passwor
         password: password,
        };
 
-       let link = "http://localhost:3000/login";
+       let link = "http://localhost:5000/login";
        const response = await axios.post(link, params, {
            headers: {"Content-Type": "application/json"}
        });
 
     //    console.log(re);
     if(response.status == 200){
-        localStorage.setItem('userToken', response.data.accessToken);
+        const date = new Date().setDate(new Date().getDate() + 10);
+        // const date = new Date().setSeconds(240);
+        // console.log(new Date(date));
+          
+        let tokendata = {
+            value: response.data.accessToken,
+            expDate: date,
+        }
+
+       
+        localStorage.setItem('userToken', JSON.stringify(tokendata))
+
+
+        // localStorage.setItem('test-item', JSON.stringify({
+        //   value: "string",
+        //   expDate: date,
+        // }))
+        // localStorage.setItem('userToken', response.data.accessToken);
         localStorage.setItem('userdetails', JSON.stringify(response.data.user));
        return response.data;
     } else {

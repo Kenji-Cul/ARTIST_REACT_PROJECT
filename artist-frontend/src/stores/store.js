@@ -4,6 +4,7 @@ import signupSlice  from '../features/signupSlice';
 import loginSlice from '../features/loginSlice';
 import logoutSlice from '../features/logoutSlice';
 import userSlice from '../features/userSlice';
+import gallerySlice from '../features/gallerySlice';
 
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
       login: loginSlice,
       logout: logoutSlice,
       user: userSlice,
+      gallery: gallerySlice,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

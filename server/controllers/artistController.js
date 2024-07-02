@@ -51,7 +51,12 @@ async function signup(req, res) {
            
        
     } catch(err){
-        console.log(err);
+        if (err.code === 11000) {
+            return res.status(400).send('User already exists.');
+            // Handle the duplicate key error here (e.g., retry with different data)
+          } else {
+            console.error('An error occurred:', err);
+          }
         res.sendStatus(400).send('Server error');
     }
 }

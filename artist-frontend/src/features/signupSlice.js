@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const signupUser = createAsyncThunk("artists/register", async({name, location, email, phone, password}, thunkAPI) => {
       try {
-         let link = "http://localhost:3000/signup";
+         let link = "http://localhost:5000/signup";
          const params = {
              name: name,
              location: location,

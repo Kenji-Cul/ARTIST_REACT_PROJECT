@@ -10,7 +10,9 @@ var bodyParser = require('body-parser');
 const cors = require("cors");
 const connectToDb = require('./config/connectToDb');
 const Artist = require('./models/artist');
+const Gallery = require('./models/gallery');
 const artistController = require('./controllers/artistController');
+const galleryController = require('./controllers/galleryController');
 var multer = require('multer');
 const fs = require('fs');
 const mime = require('mime-types');
@@ -21,6 +23,7 @@ const secretKey = 'your-secret-key';
 
 // Create an express app
 const app = express();
+
 app.use(cors({
     origin: true,
     credentials: true,
@@ -53,6 +56,15 @@ var storage = multer.diskStorage({
     }
 });
 
+var gallerystorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname + '-' + Date.now())
+    }
+});
+
 // multer({
 //     limits: { fieldSize: 2097152 }
 //   })
@@ -60,6 +72,12 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage,
     limits:  { fieldSize: 2097152 }
  });
+
+ var galleryupload = multer({ storage: gallerystorage,
+    limits:  { fieldSize: 2097152 }
+ });
+
+ 
 
 // const uploadImage = async (req, res, next) => {
 //     // to declare some path to store your converted image
@@ -121,7 +139,11 @@ app.put('/artists/:id', async (req, res) => {
     res.json({artist: artist});
 })
 
+app.post('/creategallery/:id',galleryupload.single('myfile'), galleryController.createGallery);
 
+app.get('/artistgallery/:id', galleryController.getGallery);
+
+app.get("/:folder/:image_name", galleryController.getGalleryImage);
 
 
 // Start our server

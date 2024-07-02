@@ -4,7 +4,7 @@ import axios from "axios";
 export const updateUser = createAsyncThunk("artist/update", async({description,file,user_id,fname,username,userlocation,usernumber,profile}, thunkAPI) => {
 
     try {
-       let link = `http://localhost:3000/artist/${user_id}`;
+       let link = `http://localhost:5000/artist/${user_id}`;
         // console.log(profile);
         
   
@@ -44,7 +44,7 @@ export const getUser = createAsyncThunk("/artist/getuser", async(thunkAPI) => {
         let user = localStorage.getItem("userdetails");
         let userdata = JSON.parse(user);
        
-        let link = `http://localhost:3000/artists/${userdata.id}`;
+        let link = `http://localhost:5000/artists/${userdata.id}`;
      
         const response = await axios.get(link, {
             headers: { "Content-Type": "application/json"}

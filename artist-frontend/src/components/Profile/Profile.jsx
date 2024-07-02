@@ -23,7 +23,7 @@ const Profile = () => {
   
   let user = localStorage.getItem("userdetails");
   let userdata = JSON.parse(user);
-  let link = `http://localhost:3000/artists/${userdata.id}`;
+  let link = `http://localhost:5000/artists/${userdata.id}`;
   const navigate = useNavigate();
   const [profile, setProfile] = useState({
     img: "",
@@ -74,7 +74,14 @@ const Profile = () => {
       navigate('/updatedetails')
   }
 
+  const Gallery = () => {
+    navigate('/gallery')
+  }
  
+
+ 
+  let image = `http://localhost:5000/uploads/${profile.img}`;
+  let image2 = `http://localhost:5000/uploads/profile-img.jpg`;
  
  
 
@@ -83,11 +90,12 @@ const Profile = () => {
   <div className="profile-parent-container">
       <h3>Artist Profile</h3>
        <div className="profile-container">
-          <img src={`http://localhost:3000/uploads/${profile.img}`} alt="" />
+          <img src={profile.img === null ? image2 : image} alt="" />
           <h4>Welcome! <StyledSpan>{profile.name}</StyledSpan></h4>
           <h4><FontAwesomeIcon icon={faLocationDot} /> <StyledSpan2>{profile.location}</StyledSpan2></h4>
           <h4><FontAwesomeIcon icon={faPhone} /> <StyledSpan2>{profile.phone}</StyledSpan2></h4>
           <button onClick={Update}>Edit Details</button>
+          <button onClick={Gallery}>Create Gallery</button>
           
            <p>{profile.description}</p>
        </div>

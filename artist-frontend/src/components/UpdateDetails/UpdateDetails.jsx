@@ -14,10 +14,10 @@ const StyledLabel = styled.label`
     `;
 
 const UpdateDetails = () => {
-    let link = "http://localhost:3000/updatedetails";
+    let link = "http://localhost:5000/updatedetails";
     let user = localStorage.getItem("userdetails");
   let userdata = JSON.parse(user);
-  let secondlink = `http://localhost:3000/artists/${userdata.id}`;
+  let secondlink = `http://localhost:5000/artists/${userdata.id}`;
   let filevalue = useRef();
 
   const [profile, setProfile] = useState({
@@ -74,9 +74,6 @@ const UpdateDetails = () => {
     const [usernumber, setNumber] = useState(profile.phone === null ? "" : profile.phone);
     const [errorMessage, setErrorMessage] = useState("");
 
-
-  
-  
 
     useEffect(() => {
       if (isError) {
