@@ -23,7 +23,8 @@ const Profile = () => {
   
   let user = localStorage.getItem("userdetails");
   let userdata = JSON.parse(user);
-  let link = `http://localhost:5000/artists/${userdata.id}`;
+
+ 
   const navigate = useNavigate();
   const [profile, setProfile] = useState({
     img: "",
@@ -47,6 +48,7 @@ const Profile = () => {
 
   
   async function fetchData(){
+    let link = `http://localhost:5000/artists/${userdata.id}`;
     const response = await axios.get(link, {
       headers: {
           'Content-Type': 'application/json',
@@ -65,7 +67,10 @@ const Profile = () => {
   setProfile(data);
   // console.log(profile);
   }
-   fetchData();
+  if(userdata){
+    fetchData();
+  }
+  
 
   
 

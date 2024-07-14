@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const Artist = require('../models/artist');
+const Gallery = require('../models/gallery');
 var path = require('path');
 const { type } = require('os');
 const fs = require('fs');
@@ -93,8 +94,26 @@ async function getUser(req, res){
         const userid = req.params.id;
     
         const artist = await Artist.findById(userid);
-        res.json({artist});
         
+
+        res.json({artist});
+       
+        // console.log(gallery);
+        
+    } catch(e){
+        console.log(e)
+        res.sendStatus(400).send('Server error');
+    }
+}
+
+async function getUserGallery(req, res){
+    try{
+        const userid = req.params.id;
+
+        const gallery = await Gallery.find({ userid: userid}).exec();
+
+        res.json({gallery});
+
     } catch(e){
         console.log(e)
         res.sendStatus(400).send('Server error');
@@ -222,5 +241,6 @@ module.exports = {
     login,
     updateUser,
     getUser,
-    getImage
+    getImage,
+    getUserGallery
 }

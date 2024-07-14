@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const Gallery = require('../models/gallery');
+const Artist = require('../models/artist');
 var path = require('path');
 const { type } = require('os');
 const fs = require('fs');
@@ -73,27 +74,11 @@ async function getGalleryImage(req, res){
 }
 
 
-async function getGallery(req, res){
-    try{
-        const id = req.params.id;
-    
-        const gallery = await Gallery.find({ userid: id}).exec();
-        // const gallery = await Gallery.findById(user_id);
-        res.json({gallery});
-        console.log(gallery);
-        // console.log(user_id);
-        // res.json({user_id});
-        
-    } catch(e){
-        console.log(e)
-        res.sendStatus(400).send('Server error');
-    }
-}
+
 
 
 
 module.exports = {
     createGallery,
-    getGalleryImage,
-    getGallery,
+    getGalleryImage
 }

@@ -38,6 +38,38 @@ export const createGallery = createAsyncThunk("artist/creategallery", async({gal
     }
 })
 
+export const getUserGallery = createAsyncThunk("artist/getgallery", async(thunkAPI) => {
+
+    try {
+        let user = localStorage.getItem("userdetails");
+        let userdata = JSON.parse(user);
+       let link = `http://localhost:5000/artists/gallery/${userdata.id}`;
+        // console.log(profile);
+
+
+    const response = await axios.get(link, {
+        headers: { "Content-Type": "application/json"}
+     });
+     
+     let data = await response.data;
+     if(response.status === 200){
+
+       
+        return data;
+     } 
+     else {
+        console.log(data);
+        return data;
+     }
+
+    }
+    catch (e) {
+        return thunkAPI.rejectWithValue(e.response.data);
+    }
+})
+
+
+
 export const gallerySlice = createSlice({
     name: "gallery",
     initialState: {
@@ -45,6 +77,10 @@ export const gallerySlice = createSlice({
         isSuccess: false,
         isError: false,
         errorMsg: "",
+        galleryInfo: null,
+        gallerySuccess: false,
+        galleryFetching: false,
+        galleryError: false,
     },
     reducers: {
         clearState: (state) => {
@@ -69,6 +105,20 @@ export const gallerySlice = createSlice({
         })
         .addCase(createGallery.pending, (state) => {
             state.isFetching = true;
+        })
+
+        .addCase(getUserGallery.fulfilled, (state, { payload }) => {
+            state.galleryInfo = payload;
+            state.galleryFetching = false;
+            state.gallerySuccess = true;
+            return state;
+        })  
+        .addCase(getUserGallery.rejected, (state, { payload }) => {
+            state.galleryFetching = false;
+            state.galleryError = true;
+        })
+        .addCase(getUserGallery.pending, (state) => {
+            state.galleryFetching = true;
         })
     }
 })

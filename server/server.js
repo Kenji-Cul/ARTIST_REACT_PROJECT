@@ -111,37 +111,40 @@ app.put('/artist/:id', upload.single('myfile'), artistController.updateUser);
 
 app.get('/artists/:id', artistController.getUser);
 
+app.get('/artists/gallery/:id', artistController.getUserGallery);
+
 app.get("/:folder/:image_name", artistController.getImage);
 
-app.put('/artists/:id', async (req, res) => {
-    //  Get the id off the url
-    const artistId = req.params.id;
+// app.put('/artists/:id', async (req, res) => {
+//     //  Get the id off the url
+//     const artistId = req.params.id;
 
-    // Get the data off the req body
-    const name = req.body.name;
-    const location = req.body.location;
-    const phone = req.body.phone;
-    const email = req.body.email;
+//     // Get the data off the req body
+//     const name = req.body.name;
+//     const location = req.body.location;
+//     const phone = req.body.phone;
+//     const email = req.body.email;
 
 
-    // Find and update the record
-    await Artist.findByIdAndUpdate(artistId, {
-        name : name,
-        location: location,
-        phone: phone,
-        email: email,
-    });
+//     // Find and update the record
+//     await Artist.findByIdAndUpdate(artistId, {
+//         name : name,
+//         location: location,
+//         phone: phone,
+//         email: email,
+//     });
 
-    // Find updated note
-    const artist = await Artist.findById(artistId);
+//     // Find updated note
+//     const artist = await Artist.findById(artistId);
 
-    // Respond with it
-    res.json({artist: artist});
-})
+//     // Respond with it
+//     res.json({artist: artist});
+// })
+
+
 
 app.post('/creategallery/:id',galleryupload.single('myfile'), galleryController.createGallery);
 
-app.get('/artistgallery/:id', galleryController.getGallery);
 
 app.get("/:folder/:image_name", galleryController.getGalleryImage);
 
