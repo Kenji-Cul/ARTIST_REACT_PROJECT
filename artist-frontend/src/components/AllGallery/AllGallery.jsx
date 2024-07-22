@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import image_1 from '../../images/art-one.png'
-import './ArtistGallery.css'
+import './AllGallery.css'
 import { gallerySelector, getUserGallery } from '../../features/gallerySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-const ArtistGallery = () => {
+const AllGallery = () => {
 
     
     let user = localStorage.getItem("userdetails");
@@ -20,7 +20,7 @@ const ArtistGallery = () => {
     gallerySelector
  );
   async function fetchData(){
-    let link = `http://localhost:5000/artists/gallery/${userdata.id}`;
+    let link = `http://localhost:5000/artists/galleries/${userdata.id}`;
     const response = await axios.get(link, {
       headers: {
           'Content-Type': 'application/json',
@@ -39,14 +39,18 @@ const ArtistGallery = () => {
   
   
   
-  // console.log(profile);
+ 
   }
   if(userdata){
     fetchData();
   }
+
+
   
-  const Gallery = () => {
-    navigate('/allgallery')
+ 
+
+  const editGallery = (id) => {
+    navigate(`/editgallery?gal_id=${id}`)
   }
 
 //    useEffect(() => {
@@ -60,7 +64,7 @@ const ArtistGallery = () => {
  let galleryimage2 = `http://localhost:5000/galleryuploads/no-gallery.jpg`;
   return (
     <div className="artist-gallery-container">
-        <h3>Artist Gallery</h3>
+        <h3>All Galleries</h3>
         <div className="artist-gallery">
             {
                  
@@ -76,11 +80,12 @@ const ArtistGallery = () => {
 
                 gallery.map((gallerydata) => {
                     let galleryimage = `http://localhost:5000/galleryuploads/${gallerydata.img}`;
-                   
+                     let id = gallerydata._id;
                     return (
-                        <div className="gallery-art" key={gallerydata.id}>
+                        <div className="gallery-art" key={id}>
                         <img src={galleryimage} alt="" />
                         <p>{gallerydata.name}</p>
+                        <button onClick={() => editGallery(id)} >Edit Gallery</button>
                     </div>
                     )
                 })
@@ -102,11 +107,9 @@ const ArtistGallery = () => {
                 <img src={image_1} alt="" />
                 <p>Art Name</p>
             </div> */}
-
-             <button onClick={Gallery}>All Galleries</button>
         </div>
     </div>
   )
 }
 
-export default ArtistGallery
+export default AllGallery

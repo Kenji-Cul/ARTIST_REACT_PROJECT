@@ -1,20 +1,52 @@
-import React, { useEffect, useRef} from 'react'
+import React, { useEffect, useRef, useState} from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './Navbar.css'
 import Logo from '../../images/Logo.png'
 import MenuIcon from '../../images/menu.png'
 import CloseIcon from '../../images/close.png'
+import axios from "axios";
 // import { logOut } from '../../features/logoutSlice'
 // import { useDispatch  } from 'react-redux';
 
 const Navbar = () => {
 
+
     const location = useLocation();
     const pathname = location.pathname;
 
+    const [profile, setProfile] = useState({
+      img: "",
+      desc: "",
+      username: "",
+      location: "",
+      phone: "",
+    });
+
    const menu = useRef();
+
+ let user = localStorage.getItem("userdetails");
+  let userdata = JSON.parse(user);
    
-   
+   async function fetchData(){
+    let link = `http://localhost:5000/artists/${userdata.id}`;
+    const response = await axios.get(link, {
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      
+  });
+
+  let data = response.data.artist;
+ 
+  setProfile(data);
+
+  }
+  if(userdata){
+    fetchData();
+  }
+
+  let image = `http://localhost:5000/uploads/${profile.img}`;
+  let image2 = `http://localhost:5000/uploads/profile-img.jpg`;
 
    const toggleMenu = () => {
     menu.current.style.transform =  `translateX(0%)`;
@@ -38,7 +70,7 @@ const Navbar = () => {
    }
 
 
-   let user = localStorage.getItem("userdetails");
+   
    let usertoken = localStorage.getItem("userToken");
    if(usertoken){
      const res = (new Date()).getTime() > JSON.parse(usertoken).expDate;
@@ -59,11 +91,12 @@ const Navbar = () => {
         <li ><Link to='about' className={(pathname==='/about') ? 'home-link': ''} onClick={resetMenu}>About Us</Link></li>
         <li><Link to='artists' className={(pathname==='/artists') ? 'home-link': ''} onClick={resetMenu}>Artists</Link></li>
         <li><Link to="events" className={(pathname==='/events') ? 'home-link': ''} onClick={resetMenu}>Events</Link></li>
+        <li><Link to="contactus" className={(pathname==='/contactus') ? 'home-link': ''} onClick={resetMenu}>Contact Us</Link></li>
         {
           user ? (
             <span>
             <li><Link  onClick={() => logOut()} >Logout</Link></li>
-            <li><Link to="artistprofile" className={(pathname==='/artistprofile') ? 'home-link': ''} onClick={resetMenu}>Profile</Link></li>
+            <li className="profile-link"><Link to="artistprofile"  onClick={resetMenu}><img src={profile.img === null ? image2 : image} className={(pathname==='/artistprofile') ? 'img-link': ''}/></Link></li>
             </span>
           ) : (
             <span>
@@ -73,8 +106,6 @@ const Navbar = () => {
           )
         }
 
-        
-        <li><Link to="contactus" className={(pathname==='/contactus') ? 'home-link': ''} onClick={resetMenu}>Contact Us</Link></li>
        </ul>
        <img src={MenuIcon} alt="" className="menu-icon" onClick={toggleMenu}/>
     </div>

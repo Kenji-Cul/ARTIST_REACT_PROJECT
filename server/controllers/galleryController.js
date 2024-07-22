@@ -18,31 +18,121 @@ async function createGallery(req, res){
            imgname,
         } = req.body;
 
-        var matches = req.body.myfile.match(/^data:([A-Za-z-+/]+);base64,(.+)$/),
-     response = {};
-     
-     if (matches.length !== 3) {
-     return new Error('Invalid input string');
-     }
-     response.type = matches[1];
-     response.data = Buffer.from(matches[2], 'base64');
-     let decodedImg = response;
-     let imageBuffer = decodedImg.data;
-     let type = decodedImg.type;
-     let extension = mime.extension(type);
-     let fileName = req.body.imgname;
-     fs.writeFileSync("./galleryuploads/" + fileName, imageBuffer, 'utf8');
+        let artgallery = await Gallery.findOne({ name });
+        if(artgallery){
+            res.status(400).json({message: "Gallery already exists"});
+        } else {
+            var matches = req.body.myfile.match(/^data:([A-Za-z-+/]+);base64,(.+)$/),
+            response = {};
+            
+            if (matches.length !== 3) {
+            return new Error('Invalid input string');
+            }
+            response.type = matches[1];
+            response.data = Buffer.from(matches[2], 'base64');
+            let decodedImg = response;
+            let imageBuffer = decodedImg.data;
+            let type = decodedImg.type;
+            let extension = mime.extension(type);
+            let fileName = req.body.imgname;
+            fs.writeFileSync("./galleryuploads/" + fileName, imageBuffer, 'utf8');
+       
+            // Create a gallery with it
+                       const gallery = await Gallery.create({
+                           name,
+                           userid,
+                           img: imgname,
+                       });
+       
+                       res.json({gallery});
+                       // console.log(gallery);
+        }
 
-     // Create a gallery with it
-                const gallery = await Gallery.create({
-                    name,
-                    userid,
-                    img: imgname,
-                });
-
-                res.json({gallery});
-                // console.log(gallery);
+        
                
+    } catch (err) {
+         console.log(err);
+        res.sendStatus(400).send('Server error');
+    }
+}
+
+
+async function updateGallery(req, res){
+    try {
+        const galleryid = req.params.id;
+        const {
+           name,
+           myfile,
+           imgname,
+        } = req.body;
+
+        // console.log(req.body);
+       
+        let artgallery = await Gallery.findOne({ name });
+     
+
+        if(imgname.length === 0 && myfile.length === 0 && name !== null){
+
+            const gallery = await Gallery.findById(galleryid);
+         
+          if(artgallery){
+            if(String(artgallery.name) === String(gallery.name)){
+                await Gallery.findByIdAndUpdate(galleryid,{
+                    img: gallery.img,
+                    name,
+                });
+    
+    
+                res.json({message: "Gallery updated successfully"});
+            } else {
+                res.status(400).json({message: "Gallery already exists"});
+            }
+            
+          } 
+          
+          else {
+            await Gallery.findByIdAndUpdate(galleryid,{
+                img: gallery.img,
+                name,
+            });
+
+
+            res.json({message: "Gallery updated successfully"});
+          }
+            
+        
+          
+         } else {
+
+      
+     
+            var matches = req.body.myfile.match(/^data:([A-Za-z-+/]+);base64,(.+)$/),
+            response = {};
+            
+            if (matches.length !== 3) {
+            return new Error('Invalid input string');
+            }
+            response.type = matches[1];
+            response.data = Buffer.from(matches[2], 'base64');
+            let decodedImg = response;
+            let imageBuffer = decodedImg.data;
+            let type = decodedImg.type;
+            let extension = mime.extension(type);
+            let fileName = req.body.imgname;
+            fs.writeFileSync("./galleryuploads/" + fileName, imageBuffer, 'utf8');
+       
+            // Create a gallery with it
+                       await Gallery.findByIdAndUpdate(galleryid,{
+                        img: imgname,
+                        name,
+                    });
+       
+                     
+                       // console.log(gallery);
+                       res.json({message: "Gallery updated successfully"});
+        
+    }           
+
     } catch (err) {
          console.log(err);
         res.sendStatus(400).send('Server error');
@@ -75,10 +165,8 @@ async function getGalleryImage(req, res){
 
 
 
-
-
-
 module.exports = {
     createGallery,
-    getGalleryImage
+    getGalleryImage,
+    updateGallery,
 }

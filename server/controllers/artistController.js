@@ -110,10 +110,40 @@ async function getUserGallery(req, res){
     try{
         const userid = req.params.id;
 
-        const gallery = await Gallery.find({ userid: userid}).exec();
+        const gallery = await Gallery.find({ userid: userid}).sort({_id:-1}).limit(4).exec();
 
         res.json({gallery});
 
+    } catch(e){
+        console.log(e)
+        res.sendStatus(400).send('Server error');
+    }
+}
+
+async function getAllUserGalleries(req, res){
+    try{
+        const userid = req.params.id;
+
+        const gallery = await Gallery.find({ userid: userid}).sort({_id:-1}).exec();
+
+        res.json({gallery});
+
+    } catch(e){
+        console.log(e)
+        res.sendStatus(400).send('Server error');
+    }
+}
+
+async function getGallery(req, res){
+    try{
+        const galleryid = req.params.id;
+    
+        const gallery = await Gallery.findById(galleryid);
+        
+        res.json({gallery});
+       
+        // console.log(gallery);
+        
     } catch(e){
         console.log(e)
         res.sendStatus(400).send('Server error');
@@ -242,5 +272,7 @@ module.exports = {
     updateUser,
     getUser,
     getImage,
-    getUserGallery
+    getUserGallery,
+    getAllUserGalleries,
+    getGallery,
 }

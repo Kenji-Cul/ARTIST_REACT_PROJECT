@@ -113,6 +113,12 @@ app.get('/artists/:id', artistController.getUser);
 
 app.get('/artists/gallery/:id', artistController.getUserGallery);
 
+app.get('/artists/galleries/:id', artistController.getAllUserGalleries); 
+
+app.get('/artistgallery/:id', artistController.getGallery);  
+
+app.put('/artistgallery/update/:id', galleryupload.single('myfile'), galleryController.updateGallery);  
+
 app.get("/:folder/:image_name", artistController.getImage);
 
 // app.put('/artists/:id', async (req, res) => {

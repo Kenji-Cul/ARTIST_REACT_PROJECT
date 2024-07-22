@@ -54,9 +54,25 @@
     padding: 8px 2.5em;
 }
 
+
+
 .navbar ul .home-link:hover{
     background: var(--color-primary);
     color: var(--color-secondary);
+}
+
+.navbar .img-link{
+    border: 2px solid var(--color-secondary);
+}
+
+
+.navbar ul li img{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    position: absolute;
+    bottom: 1.5em;
 }
 
 /* ------------ Media Query ------------- */
@@ -143,4 +159,6 @@
         background: var(--color-third);
         color: var(--color-primary);
     }
+
+   
 }

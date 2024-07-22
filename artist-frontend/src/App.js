@@ -13,6 +13,8 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UpdateDetails from "./components/UpdateDetails/UpdateDetails";
 import UserRoute from "./components/UserRoute/UserRoute";
 import Gallery from "./components/Gallery/Gallery";
+import AllGallery from "./components/AllGallery/AllGallery";
+import EditGallery from "./components/EditGallery/EditGallery";
 
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
              <Route  path="artistprofile" element={<ArtistProfile />}/>
              <Route  path="updatedetails" element={<UpdateDetails />}/>
              <Route  path="gallery" element={<Gallery />}/>
+             <Route  path="allgallery" element={<AllGallery />}/>
+             <Route  path="editgallery" element={<EditGallery />}/>
              </Route>
              <Route  path="*" element={<ErrorPage />}/>
 

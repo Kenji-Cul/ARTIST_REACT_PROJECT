@@ -38,6 +38,41 @@ export const createGallery = createAsyncThunk("artist/creategallery", async({gal
     }
 })
 
+export const updateGallery = createAsyncThunk("artist/updategallery", async({galleryname,fname,user_id,file}, thunkAPI) => {
+
+    try {
+       let link = `http://localhost:5000/artistgallery/update/${user_id}`;
+        // console.log(profile);
+        
+       const params = {
+        name: galleryname,
+        myfile: file,
+        imgname: fname,
+    };
+   
+
+
+    const response = await axios.put(link, params, {
+        headers: { Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',}
+    });
+     
+     let data = await response.data;
+     if(response.status === 200){
+        console.log(data);
+        return data;
+     } 
+     else {
+        console.log(data);
+        return data;
+     }
+
+    }
+    catch (e) {
+        return thunkAPI.rejectWithValue(e.response.data);
+    }
+})
+
 export const getUserGallery = createAsyncThunk("artist/getgallery", async(thunkAPI) => {
 
     try {
@@ -53,9 +88,8 @@ export const getUserGallery = createAsyncThunk("artist/getgallery", async(thunkA
      
      let data = await response.data;
      if(response.status === 200){
-
-       
         return data;
+
      } 
      else {
         console.log(data);
@@ -81,6 +115,10 @@ export const gallerySlice = createSlice({
         gallerySuccess: false,
         galleryFetching: false,
         galleryError: false,
+        updateSuccess: false,
+        updateFetching: false,
+        updateError: false,
+        updateInfo: null,
     },
     reducers: {
         clearState: (state) => {
@@ -116,9 +154,26 @@ export const gallerySlice = createSlice({
         .addCase(getUserGallery.rejected, (state, { payload }) => {
             state.galleryFetching = false;
             state.galleryError = true;
+            state.errorMsg = payload.message;
         })
         .addCase(getUserGallery.pending, (state) => {
             state.galleryFetching = true;
+        })
+
+        .addCase(updateGallery.fulfilled, (state, { payload }) => {
+            
+            state.updateFetching = false;
+            state.updateSuccess = true;
+            state.updateInfo = payload.message;
+            return state;
+        }) 
+        .addCase(updateGallery.rejected, (state, { payload }) => {
+            state.updateFetching = false;
+            state.updateError = true;
+            state.updateError = payload.message;
+        })
+        .addCase(updateGallery.pending, (state) => {
+            state.updateFetching = true;
         })
     }
 })
