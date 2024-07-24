@@ -160,5 +160,10 @@
         color: var(--color-primary);
     }
 
+    .navbar ul .profile-link{
+        position: absolute;
+        top: 5em;
+    }
+
    
 }

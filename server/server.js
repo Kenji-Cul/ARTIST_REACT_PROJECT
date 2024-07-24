@@ -154,6 +154,8 @@ app.post('/creategallery/:id',galleryupload.single('myfile'), galleryController.
 
 app.get("/:folder/:image_name", galleryController.getGalleryImage);
 
+app.delete("/artistgallery/:id", galleryController.deleteGallery);
+
 
 // Start our server
 app.listen(process.env.PORT);

@@ -44,6 +44,17 @@
     object-fit: cover;
 }
 
+.gallery-heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-heading img{
+    width: 2em;
+    height: 2em;
+}
+
 .gallery-art .no-gallery{
     padding-top: 5em;
     padding-bottom: 5em;

@@ -14,6 +14,7 @@
 
 .form-container h3{
     color: #fff;
+    padding-bottom: 2em;
    text-align: center;
 }
 
@@ -67,20 +68,6 @@
     flex-direction: column;
     position: relative;
     gap: 1em;
-}
-
-.gallery-heading{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2em;
-    padding-bottom: 2em;
-}
-
-.gallery-heading img{
-    width: 2em;
-    height: 2em;
-    margin-bottom: 32px;
 }
 
 .input-div .eye-slash{
@@ -157,6 +144,17 @@
     width: 20em;
     height: 20em;
     border-radius: 50%;
+}
+
+.gallery-heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-heading img{
+    width: 2em;
+    height: 2em;
 }
 
 .no-gallery h4{

@@ -15,6 +15,7 @@ import UserRoute from "./components/UserRoute/UserRoute";
 import Gallery from "./components/Gallery/Gallery";
 import AllGallery from "./components/AllGallery/AllGallery";
 import EditGallery from "./components/EditGallery/EditGallery";
+import DeleteGallery from "./components/DeleteGallery/DeleteGallery";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
              <Route  path="gallery" element={<Gallery />}/>
              <Route  path="allgallery" element={<AllGallery />}/>
              <Route  path="editgallery" element={<EditGallery />}/>
+             <Route  path="deletegallery" element={<DeleteGallery />}/>
              </Route>
              <Route  path="*" element={<ErrorPage />}/>
 

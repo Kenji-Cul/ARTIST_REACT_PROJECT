@@ -59,11 +59,40 @@ export const updateGallery = createAsyncThunk("artist/updategallery", async({gal
      
      let data = await response.data;
      if(response.status === 200){
-        console.log(data);
+        // console.log(data);
         return data;
      } 
      else {
-        console.log(data);
+        // console.log(data);
+        return data;
+     }
+
+    }
+    catch (e) {
+        return thunkAPI.rejectWithValue(e.response.data);
+    }
+})
+
+
+export const deleteGallery = createAsyncThunk("artist/deletegallery", async({user_id}, thunkAPI) => {
+
+    try {
+       let link = `http://localhost:5000/artistgallery/${user_id}`;
+        // console.log(profile);
+        
+
+    const response = await axios.delete(link, {
+        headers: { Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',}
+    });
+     
+     let data = await response.data;
+     if(response.status === 200){
+        // console.log(data);
+        return data;
+     } 
+     else {
+        // console.log(data);
         return data;
      }
 
@@ -92,7 +121,7 @@ export const getUserGallery = createAsyncThunk("artist/getgallery", async(thunkA
 
      } 
      else {
-        console.log(data);
+        // console.log(data);
         return data;
      }
 
@@ -119,6 +148,9 @@ export const gallerySlice = createSlice({
         updateFetching: false,
         updateError: false,
         updateInfo: null,
+        deleteSuccess: false,
+        deleteFetching: false,
+        deleteError: false,
     },
     reducers: {
         clearState: (state) => {
@@ -174,6 +206,19 @@ export const gallerySlice = createSlice({
         })
         .addCase(updateGallery.pending, (state) => {
             state.updateFetching = true;
+        })
+        .addCase(deleteGallery.fulfilled, (state, { payload }) => {
+            
+            state.deleteFetching = false;
+            state.deleteSuccess = true;
+            return state;
+        }) 
+        .addCase(deleteGallery.rejected, (state, { payload }) => {
+            state.deleteFetching = false;
+            state.deleteError = true;
+        })
+        .addCase(deleteGallery.pending, (state) => {
+            state.deleteFetching = true;
         })
     }
 })

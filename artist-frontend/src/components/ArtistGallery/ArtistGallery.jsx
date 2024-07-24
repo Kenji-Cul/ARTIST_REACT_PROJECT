@@ -16,6 +16,7 @@ const ArtistGallery = () => {
   const [gallery, setGallery] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+ 
   const { galleryFetching, gallerySuccess, galleryError, galleryInfo } = useSelector(
     gallerySelector
  );
@@ -32,9 +33,11 @@ const ArtistGallery = () => {
  const data = response.data.gallery;
 
  if(data.length === 0){
+  
     setGallery(null)
  } else {
     setGallery(data);
+    
  }
   
   
@@ -63,6 +66,8 @@ const ArtistGallery = () => {
         <h3>Artist Gallery</h3>
         <div className="artist-gallery">
             {
+
+             
                  
                    gallery === null ? 
                   
@@ -73,6 +78,7 @@ const ArtistGallery = () => {
            </div>
                 
                 : 
+
 
                 gallery.map((gallerydata) => {
                     let galleryimage = `http://localhost:5000/galleryuploads/${gallerydata.img}`;
@@ -102,9 +108,9 @@ const ArtistGallery = () => {
                 <img src={image_1} alt="" />
                 <p>Art Name</p>
             </div> */}
-
-             <button onClick={Gallery}>All Galleries</button>
+    
         </div>
+        <div className="all-galleries-button"><button onClick={Gallery}>All Galleries</button></div>
     </div>
   )
 }

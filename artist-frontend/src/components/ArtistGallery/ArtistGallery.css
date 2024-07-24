@@ -61,6 +61,13 @@
     padding-top: 3em;
 }
 
+.all-galleries-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3em;
+}
+
 @media (max-width: 800px){ 
     .gallery-art img{
         width: 15em;

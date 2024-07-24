@@ -7,6 +7,7 @@ const { type } = require('os');
 const fs = require('fs');
 const mime = require('mime-types');
 var ObjectID = require('mongodb').ObjectId;
+const { MongoClient, ObjectId } = require("mongodb");
 
 
 async function createGallery(req, res){
@@ -139,6 +140,23 @@ async function updateGallery(req, res){
     }
 }
 
+async function deleteGallery(req, res){
+    try {
+        
+        const galleryid = req.params.id;
+        // console.log(galleryid);
+    
+        await Gallery.findByIdAndDelete(galleryid);
+
+        res.json({message: "Gallery deleted successfully"});
+    }
+
+    catch(err){
+        console.log(err);
+        res.sendStatus(400).send('Server error');
+    }
+}
+
 
 async function getGalleryImage(req, res){
     const { folder, image_name } = req.params;
@@ -169,4 +187,5 @@ module.exports = {
     createGallery,
     getGalleryImage,
     updateGallery,
+    deleteGallery,
 }

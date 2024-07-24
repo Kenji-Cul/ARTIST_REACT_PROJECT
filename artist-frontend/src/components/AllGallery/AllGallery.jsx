@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from 'react'
+import { Link} from 'react-router-dom';
+import styled from 'styled-components';
 import image_1 from '../../images/art-one.png'
 import './AllGallery.css'
 import { gallerySelector, getUserGallery } from '../../features/gallerySlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import LeftSvg  from '../../images/circle-arrow-left-solid.svg';
+
+const StyledDiv = styled.div`
+   display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const StyledImg = styled.img`
+    width: 2em;
+    height: 2em;
+`;
 
 const AllGallery = () => {
 
@@ -53,6 +68,10 @@ const AllGallery = () => {
     navigate(`/editgallery?gal_id=${id}`)
   }
 
+  const deleteGallery = (id) => {
+    navigate(`/deletegallery?gal_id=${id}`)
+  }
+
 //    useEffect(() => {
 //     dispatch(getUserGallery());
 //     setGallery(galleryInfo);
@@ -61,13 +80,22 @@ const AllGallery = () => {
 //  }, []);
 
 
+
+
+  
+   
+  
+
+
  let galleryimage2 = `http://localhost:5000/galleryuploads/no-gallery.jpg`;
   return (
     <div className="artist-gallery-container">
-        <h3>All Galleries</h3>
+        <StyledDiv> <Link to="/artistprofile"><StyledImg src={LeftSvg}/></Link><h3>All Galleries</h3></StyledDiv>
         <div className="artist-gallery">
             {
-                 
+
+             
+    
                    gallery === null ? 
                   
 
@@ -86,6 +114,7 @@ const AllGallery = () => {
                         <img src={galleryimage} alt="" />
                         <p>{gallerydata.name}</p>
                         <button onClick={() => editGallery(id)} >Edit Gallery</button>
+                        <button onClick={() => deleteGallery(id)} >Delete Gallery</button>
                     </div>
                     )
                 })
