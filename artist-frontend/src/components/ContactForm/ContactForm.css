@@ -45,3 +45,17 @@
     border: 2px solid var(--color-third);
     cursor: pointer;
 }
+
+.contact-form .error-msg{
+    border-radius: 10px;
+    width: 12em;
+    padding: 0.7em 10px;
+    margin-top: 9px;
+    background-color: #E53124;
+    color: #f5f5f5;
+    text-align: center;
+}
+
+.error-msg.off-screen{
+    display: none;
+}
